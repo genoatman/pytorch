@@ -22,3 +22,5 @@ RUN apt-get install -y libfreetype6-dev
 ENV CC=gcc CXX=g++ PKG_CONFIG=x86_64-pc-linux-gnu-pkg-config
 RUN cd /mat/matplotlib-3.1.2 && python3 -mpip install .
 
+# install jupyter
+RUN python3 -m pip install --upgrade pip && python3 -m pip install jupyter
