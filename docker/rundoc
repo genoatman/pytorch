@@ -1,0 +1,26 @@
+#!/bin/bash
+
+###########################################################
+#  Shell script to wrap docker command with basic mappings
+###########################################################
+
+function doHelp() {
+        printf "\nUsage:"
+        printf "\n  rundoc arg1 arg2 arg3"
+        printf "\n  arguments are appended to the docker command line set of arguments"
+        printf "\n\nExample:"
+        printf "\n  rundoc -v /home/me/dir:/h image:tag"
+        printf "\n    This will execute a docker run ... -v /home/me/dir:/h image:tag\n\n\n"
+}
+
+if [ "$#" -eq 0 ]
+then
+        printf "\nYou must at least specify the image you are executing on the command line\n"
+        doHelp
+        exit 1
+fi
+
+docker run --rm -it --runtime=nvidia \
+   --env USER=$USER --env HOME=$HOME --env DISPLAY=$DISPLAY \
+   --volume="/home/$USER:/home/$USER" $*
+
