@@ -14,10 +14,11 @@ RUN mkdir $torchtmp && cd $torchtmp && \
 
 # other python packages
 RUN pip3 install torchvision
-# RUN DEBIAN_FRONTEND=noninteractive && apt-get install -y python3-matplotlib
+
 RUN mkdir mat && cd mat && \
   wget https://files.pythonhosted.org/packages/75/81/53ccadcb8cad0a9837f1487b57f2b46b21caa2b3f35f72bc1acb06b5825c/matplotlib-3.1.2.tar.gz && tar xvf matplotlib-3.1.2.tar.gz
-# ENV CC=x86_64-pc-linux-gnu-gcc CXX=x86_64-pc-linux-gnu-g++ PKG_CONFIG=x86_64-pc-linux-gnu-pkg-config
+
+# create matplotlib from source
 RUN apt-get install -y libfreetype6-dev
 ENV CC=gcc CXX=g++ PKG_CONFIG=x86_64-pc-linux-gnu-pkg-config
 RUN cd /mat/matplotlib-3.1.2 && python3 -mpip install .
